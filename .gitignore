@@ -1,0 +1,7 @@
+.github
+.vscode
+.idea
+web-frontend/.vscode
+web-frontend/node_modules
+admin-frontend/.vscode
+admin-frontend/node_modules

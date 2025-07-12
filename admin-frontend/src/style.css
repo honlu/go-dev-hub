@@ -1,0 +1,460 @@
+/* 1980年代经典UI/UX风格样式系统 */
+
+/* 经典动画效果 */
+@keyframes classic-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes text-glow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 2px #00ff00, 0 0 4px #00ff00;
+  }
+
+  50% {
+    text-shadow: 0 0 4px #00ff00, 0 0 8px #00ff00;
+  }
+}
+
+@keyframes button-press {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 4px 0 #333, 0 8px 0 #111;
+  }
+
+  50% {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #333, 0 4px 0 #111;
+  }
+
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 4px 0 #333, 0 8px 0 #111;
+  }
+}
+
+@keyframes retro-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* 全局变量 */
+:root {
+  --classic-green: #00ff00;
+  --classic-dark-green: #00cc00;
+  --classic-black: #000000;
+  --classic-dark-gray: #1a1a1a;
+  --classic-gray: #333333;
+  --classic-light-gray: #666666;
+  --classic-white: #ffffff;
+  --classic-yellow: #ffff00;
+  --classic-cyan: #00ffff;
+  --classic-magenta: #ff00ff;
+  --classic-red: #ff0000;
+  --classic-blue: #0000ff;
+
+  --border-width: 2px;
+  --border-radius: 4px;
+  --shadow-intensity: 0.3;
+}
+
+/* 基础样式重置 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  color: var(--classic-green);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* 主应用容器 */
+#app {
+  position: relative;
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* 经典按钮样式 */
+.retro-button {
+  background: linear-gradient(145deg, var(--classic-gray), var(--classic-dark-gray));
+  border: var(--border-width) solid var(--classic-green);
+  color: var(--classic-green);
+  padding: 12px 24px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  box-shadow:
+    0 4px 0 var(--classic-dark-gray),
+    0 8px 0 var(--classic-black),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  text-shadow: 0 0 3px var(--classic-green);
+  border-radius: var(--border-radius);
+}
+
+.retro-button:hover {
+  background: linear-gradient(145deg, var(--classic-light-gray), var(--classic-gray));
+  color: var(--classic-yellow);
+  text-shadow: 0 0 5px var(--classic-yellow);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 var(--classic-dark-gray),
+    0 12px 0 var(--classic-black),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.retro-button:active {
+  animation: button-press 0.1s ease;
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 var(--classic-dark-gray),
+    0 4px 0 var(--classic-black),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 经典输入框 */
+.retro-input {
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  color: var(--classic-green);
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  outline: none;
+  position: relative;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 5px rgba(0, 255, 0, 0.2);
+  text-shadow: 0 0 2px var(--classic-green);
+  border-radius: var(--border-radius);
+}
+
+.retro-input:focus {
+  border-color: var(--classic-yellow);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(255, 255, 0, 0.3);
+  text-shadow: 0 0 4px var(--classic-yellow);
+}
+
+/* 经典卡片 */
+.retro-card {
+  background: linear-gradient(145deg, var(--classic-dark-gray), var(--classic-black));
+  border: var(--border-width) solid var(--classic-green);
+  padding: 20px;
+  margin: 10px;
+  position: relative;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(0, 255, 0, 0.1);
+  border-radius: var(--border-radius);
+}
+
+.retro-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--classic-green), var(--classic-cyan), var(--classic-green));
+  animation: retro-pulse 3s ease-in-out infinite;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+/* 经典标题 */
+.retro-title {
+  color: var(--classic-yellow);
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 0 5px var(--classic-yellow);
+  animation: text-glow 3s ease-in-out infinite;
+  margin: 20px 0;
+}
+
+/* 经典菜单 */
+.retro-menu {
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(0, 255, 0, 0.1);
+  border-radius: var(--border-radius);
+}
+
+.retro-menu-item {
+  color: var(--classic-green);
+  padding: 12px 20px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 0 0 3px var(--classic-green);
+  border-bottom: 1px solid var(--classic-dark-gray);
+}
+
+.retro-menu-item:hover {
+  background: var(--classic-dark-gray);
+  color: var(--classic-yellow);
+  text-shadow: 0 0 5px var(--classic-yellow);
+  box-shadow: inset 0 0 10px rgba(255, 255, 0, 0.2);
+}
+
+.retro-menu-item.active {
+  background: var(--classic-green);
+  color: var(--classic-black);
+  text-shadow: none;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 经典表格 */
+.retro-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.retro-table th,
+.retro-table td {
+  border: 1px solid var(--classic-green);
+  padding: 12px;
+  text-align: left;
+  color: var(--classic-green);
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 2px var(--classic-green);
+}
+
+.retro-table th {
+  background: var(--classic-dark-gray);
+  color: var(--classic-yellow);
+  text-shadow: 0 0 3px var(--classic-yellow);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.retro-table tr:hover {
+  background: rgba(0, 255, 0, 0.05);
+  box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.1);
+}
+
+/* 经典加载动画 */
+.retro-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--classic-green);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 经典进度条 */
+.retro-progress {
+  width: 100%;
+  height: 20px;
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.retro-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--classic-green), var(--classic-cyan));
+  box-shadow: 0 0 5px var(--classic-green);
+  animation: retro-pulse 2s ease-in-out infinite;
+}
+
+/* 经典模态框 */
+.retro-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.retro-modal-content {
+  background: var(--classic-black);
+  border: 3px solid var(--classic-green);
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow:
+    0 0 20px rgba(0, 255, 0, 0.3),
+    inset 0 0 10px rgba(0, 255, 0, 0.05);
+  border-radius: var(--border-radius);
+}
+
+/* 经典通知 */
+.retro-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  color: var(--classic-green);
+  padding: 15px 20px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  animation: retro-pulse 2s ease-in-out infinite;
+  z-index: 10001;
+  border-radius: var(--border-radius);
+}
+
+/* 表单样式 */
+.retro-form {
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.retro-form-group {
+  margin-bottom: 20px;
+}
+
+.retro-form-label {
+  display: block;
+  color: var(--classic-yellow);
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-shadow: 0 0 3px var(--classic-yellow);
+}
+
+.retro-form-input {
+  width: 100%;
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  color: var(--classic-green);
+  padding: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  border-radius: var(--border-radius);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.retro-form-input:focus {
+  border-color: var(--classic-yellow);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 5px rgba(255, 255, 0, 0.3);
+}
+
+.retro-form-textarea {
+  width: 100%;
+  min-height: 100px;
+  background: var(--classic-black);
+  border: var(--border-width) solid var(--classic-green);
+  color: var(--classic-green);
+  padding: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  border-radius: var(--border-radius);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  resize: vertical;
+}
+
+.retro-form-textarea:focus {
+  border-color: var(--classic-yellow);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 5px rgba(255, 255, 0, 0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .retro-title {
+    font-size: 18px;
+  }
+
+  .retro-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .retro-card {
+    padding: 15px;
+    margin: 5px;
+  }
+
+  .retro-form {
+    padding: 15px;
+  }
+}
+
+/* 深色模式优化 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --classic-green: #00ff00;
+    --classic-yellow: #ffff00;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  :root {
+    --classic-green: #00ff00;
+    --classic-yellow: #ffff00;
+    --classic-black: #000000;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

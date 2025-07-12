@@ -1,0 +1,6 @@
+.git
+*.log
+*.DS_Store
+*.exe
+*.out
+*.zip
