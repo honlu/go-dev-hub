@@ -19,6 +19,12 @@ import HelloWorld from './components/HelloWorld.vue'
             <span class="menu-icon">❓</span>
             题库管理
           </div>
+          <div class="retro-menu-item" 
+               :class="{ active: $route.path === '/stats' }"
+               @click="$router.push('/stats')">
+            <span class="menu-icon">📊</span>
+            访问统计
+          </div>
         </div>
       </el-aside>
       <el-container>

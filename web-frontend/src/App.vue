@@ -19,6 +19,12 @@ import HelloWorld from './components/HelloWorld.vue'
             <span class="menu-icon">❓</span>
             题库列表
           </div>
+          <div class="retro-menu-item" 
+               :class="{ active: $route.path === '/stats' }"
+               @click="$router.push('/stats')">
+            <span class="menu-icon">📊</span>
+            网站统计
+          </div>
         </div>
       </el-aside>
       <el-container>
@@ -32,6 +38,31 @@ import HelloWorld from './components/HelloWorld.vue'
         <el-main class="retro-main">
           <router-view />
         </el-main>
+        
+        <!-- 底部统计信息 -->
+        <el-footer height="auto" class="retro-footer">
+          <div class="footer-stats">
+            <div class="stats-container">
+              <div class="stat-item">
+                <span class="stat-icon">👥</span>
+                <span class="stat-label">总访客数：</span>
+                <span class="stat-value" id="busuanzi_value_site_uv">-</span>
+              </div>
+              <div class="stat-divider">|</div>
+              <div class="stat-item">
+                <span class="stat-icon">📈</span>
+                <span class="stat-label">总访问量：</span>
+                <span class="stat-value" id="busuanzi_value_site_pv">-</span>
+              </div>
+              <div class="stat-divider">|</div>
+              <div class="stat-item">
+                <span class="stat-icon">📄</span>
+                <span class="stat-label">本页访问：</span>
+                <span class="stat-value" id="busuanzi_value_page_pv">-</span>
+              </div>
+            </div>
+          </div>
+        </el-footer>
       </el-container>
     </el-container>
   </div>
@@ -215,6 +246,84 @@ import HelloWorld from './components/HelloWorld.vue'
   
   .retro-menu-item:hover {
     transform: none;
+  }
+}
+
+/* 底部统计样式 */
+.retro-footer {
+  background: var(--classic-black) !important;
+  border-top: var(--border-width) solid var(--classic-green);
+  padding: 15px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.retro-footer::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--classic-green), var(--classic-cyan), var(--classic-green));
+  animation: retro-pulse 3s ease-in-out infinite;
+}
+
+.footer-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--classic-green);
+}
+
+.stat-icon {
+  font-size: 16px;
+  animation: retro-pulse 2s ease-in-out infinite;
+}
+
+.stat-label {
+  color: var(--classic-green);
+  font-weight: bold;
+}
+
+.stat-value {
+  color: var(--classic-yellow);
+  font-weight: bold;
+  text-shadow: 0 0 3px var(--classic-yellow);
+  min-width: 30px;
+  text-align: center;
+}
+
+.stat-divider {
+  color: var(--classic-green);
+  font-weight: bold;
+  opacity: 0.6;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+  }
+  
+  .stat-divider {
+    display: none;
   }
 }
 </style>
